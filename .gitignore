@@ -38,7 +38,7 @@ next-env.d.ts
 /prisma
 
 # firebase stuff
-./service-account.json
+service-account.json
 firebase.config.ts
 
 # VS Code Config
