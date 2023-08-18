@@ -1,7 +1,21 @@
 
-import { createContext, PropsWithChildren, useState, useContext, useEffect, useCallback } from 'react';
-import {User,onAuthStateChanged, signInWithCustomToken } from 'firebase/auth';
-import { useSession, signOut as sessionSignOut } from "next-auth/react";
+import { 
+  createContext, 
+  type PropsWithChildren, 
+  useState, 
+  useContext, 
+  useEffect, 
+  useCallback 
+} from 'react';
+import { 
+  type User,
+  onAuthStateChanged, 
+  signInWithCustomToken 
+} from 'firebase/auth';
+import { 
+  useSession,
+   signOut as sessionSignOut 
+} from "next-auth/react";
 import { auth } from '~/lib/firebase/client-config';
 
 type authStatus = 'authenticated' | 'unauthenticated' | 'loading';
@@ -12,19 +26,23 @@ const AuthCtx = createContext<{
   signOut(): void;
   user: User | null;
 }>({
-  signIn(a: string) {},
+  signIn: (_a: string) => {
+    // do nothing
+  },
   status: 'loading',
-  signOut() {},
+  signOut: () => {
+// do nothing
+  },
   user: null,
 });
 export const useAuth = () => useContext(AuthCtx);
 
-const ClientAuthProvider = ({ children }: PropsWithChildren<{}>) => {
+const ClientAuthProvider = ({ children }: PropsWithChildren<Record<string, never>>) => {
   const [status, setStatus] = useState<authStatus>('loading');
 
   const { data: session } = useSession();
 
-  const signIn = useCallback(async (customToken: string) => {
+  const signIn = useCallback( async (customToken: string) => {
     try {
       setStatus('loading');
       await signInWithCustomToken(auth, customToken);
@@ -38,24 +56,22 @@ const ClientAuthProvider = ({ children }: PropsWithChildren<{}>) => {
   const signOut = async () => {
     setStatus('authenticated');
     await auth.signOut();
-    sessionSignOut();
+    await sessionSignOut();
   };
 
   // sign in with session customtoken becomes available
   useEffect(() => {
-    if('unauthenticated' === status && session && session.customToken) {
+    if('unauthenticated' === status && session?.customToken) {
       signIn(session.customToken)
     }
-  },[]);
+  },[status, session, signIn]);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      if (user) {
+      if (user) 
         setStatus('authenticated');
-      }
-      else {
-        signOut();
-      }
+      else 
+        signOut()
     });
   }, [status]);
 

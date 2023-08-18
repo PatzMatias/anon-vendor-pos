@@ -1,5 +1,5 @@
-import { useSession } from "next-auth/react";
-import { db } from "~/lib/firebase/config";
+// import { useSession } from "next-auth/react";
+// import { db } from "~/lib/firebase/config";
 import DashboardLayout from "~/pages/dashboard/layout";
 
 export default function Admin() {

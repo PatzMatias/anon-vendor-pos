@@ -3,18 +3,16 @@ import {
   getServerSession,
   type NextAuthOptions,
   type DefaultSession,
-  type DefaultUser,
   // type Profile as DefaultProfile,
 } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import CredentialsProvider from "next-auth/providers/credentials";
 import { FirestoreAdapter } from "@next-auth/firebase-adapter";
-import { app, db, adminAuth } from "~/lib/firebase/admin-config";
+import {  db } from "~/lib/firebase/admin-config";
 import { env } from "~/env.mjs";
 import type { DefaultJWT } from "next-auth/jwt";
 import SignUpUser from "~/server/auth/sign-up-process";
 import CreateCustomToken from "~/server/auth/create-custom-token";
-import SetUserRolesViaCustomClaims from "~/server/auth/set-custom-claims";
+// import SetUserRolesViaCustomClaims from "~/server/auth/set-custom-claims";
 import GetUserRole from "~/server/auth/get-user-role";
 
 export type UserRole = "admin" | "agent" | "user" | null;
@@ -92,10 +90,10 @@ export const authOptions: NextAuthOptions = {
     //    */
     //   return true
     // },
-    session: async ({ session, token }) => {
-    session.user.id = token.sub ? token.sub : '';
-    session.customToken = token.customToken ? token.customToken : '';
-    session.user.role = token.role ? token.role : '';
+    session: ({ session, token }) => {
+      session.user.id = token.sub ? token.sub : '';
+      session.customToken = token.customToken ? token.customToken : '';
+      session.user.role = token.role ? token.role : '';
 
       return session;
     },
@@ -105,8 +103,6 @@ export const authOptions: NextAuthOptions = {
       profile,
       trigger
     }) => {
-
-      let role;
 
       if("signUp" === trigger) {
         if(profile) await SignUpUser(account, profile, token)

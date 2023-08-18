@@ -1,11 +1,14 @@
-import type { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
+
+import type { GetServerSidePropsContext, InferGetServerSidePropsType, } from "next";
 import { getProviders, signIn } from "next-auth/react";
+import type { ClientSafeProvider } from "next-auth/react";
 import { getServerAuthSession } from "~/server/auth";
 
 export default function SignIn({ providers }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+
   return (
     <>
-      {Object.values(providers).map((provider) => (
+      {Object.values(providers).map((provider: ClientSafeProvider) => (
         <div key={provider.name}>
           <button onClick={() => signIn(provider.id)}>
             Sign in with {provider.name}

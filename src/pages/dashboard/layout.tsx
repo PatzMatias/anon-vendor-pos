@@ -1,6 +1,6 @@
-import { useSession } from "next-auth/react";
-import { ReactElement } from "react";
-import { db } from "~/lib/firebase/config";
+// import { useSession } from "next-auth/react";
+// import { db } from "~/lib/firebase/config";
+import type { ReactElement } from "react";
 import Head from "next/head";
 
 interface DashboardLayoutProps {

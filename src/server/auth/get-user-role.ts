@@ -2,9 +2,9 @@ import type { Profile } from "next-auth";
 import { adminAuth } from "~/lib/firebase/admin-config";
 
 export default async function GetUserRole(profile?: Profile) {
+  let role;
   try {
-    let role;
-    if(profile && profile.email) {
+    if(profile?.email) {
       const user = await adminAuth.getUserByEmail(profile.email);
       if(user.customClaims) {
         const getRole = Object.entries(user.customClaims)
@@ -16,6 +16,6 @@ export default async function GetUserRole(profile?: Profile) {
     return role;
   } catch(e) {
     console.error(e);
-    return undefined;
+    return role;
   }
 }

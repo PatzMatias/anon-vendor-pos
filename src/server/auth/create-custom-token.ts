@@ -3,7 +3,7 @@ import { adminAuth } from "~/lib/firebase/admin-config";
 
 export default async function CreateCustomToken(token: JWT) {
   try {
-    if(token && token.sub) {
+    if(token?.sub) {
       const customToken = await adminAuth.createCustomToken(token.sub);
       return customToken;
     }

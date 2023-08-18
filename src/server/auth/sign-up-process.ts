@@ -10,9 +10,8 @@ export default async function SignUpUser(account: Account | null, profile: Profi
       admin: false,
       agent: false
     }
-    if(profile && profile.email) {
-      if(token && token.sub) {
-        console.log('CREATING USER');
+    if(profile?.email) {
+      if(token?.sub) {
         const createUser = await adminAuth.createUser({
           email: profile?.email,
           emailVerified: profile?.email_verified,

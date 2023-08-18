@@ -1,4 +1,4 @@
-import type { DefaultJWT, JWT } from "next-auth/jwt";
+// import type { DefaultJWT, JWT } from "next-auth/jwt";
 import { auth } from "~/lib/firebase/client-config";
 import { signInWithCustomToken } from "firebase/auth";
 
