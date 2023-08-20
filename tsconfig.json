@@ -15,8 +15,8 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "baseUrl": ".",
     "noUncheckedIndexedAccess": true,
+    "baseUrl": ".",
     "paths": {
       "~/*": ["./src/*"]
     }

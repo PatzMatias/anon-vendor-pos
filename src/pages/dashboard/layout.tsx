@@ -4,7 +4,7 @@ import type { ReactElement } from "react";
 import Head from "next/head";
 
 interface DashboardLayoutProps {
-  children: ReactElement
+  children?: ReactElement
 }
 
 export default function DashboardLayout({ children }: DashboardLayoutProps) {

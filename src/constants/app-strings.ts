@@ -1,4 +1,4 @@
-export const TEXT = {
+const APP_STRINGS: {[key: string]: string} = {
   site_title: `Anon Vendor POS`,
   signin: `Sign in`,
   signout: `Sign out`,
@@ -11,4 +11,4 @@ export const TEXT = {
   new_order: `New Order`
 }
 
-export default TEXT;
+export { APP_STRINGS };
