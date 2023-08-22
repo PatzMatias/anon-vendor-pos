@@ -1,15 +1,18 @@
-// import { useSession } from "next-auth/react";
-// import { db } from "~/lib/firebase/config";
-import DashboardLayout from "../layout";
+import type { ReactElement } from "react";
+import DashboardLayout from "~/components/layout/DashboardLayout";
 
 export default function Admin() {
 
   return (
-    <>
-      <DashboardLayout>
+    <section className="container-fluid grid px-6 mx-auto">
         <h1>This is an admin page.</h1>
-      </DashboardLayout>
-    </>
+    </section>
   );
 }
 
+
+Admin.getLayout = function getLayout(page: ReactElement) {
+  return (
+    <DashboardLayout>{page}</DashboardLayout>
+  )
+}

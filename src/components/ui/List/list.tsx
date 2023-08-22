@@ -6,16 +6,15 @@ interface IProps extends ChildProps, ClassNameProps {
 }
 
 export default function List({ children, className, type }: IProps) {
+  const classes = cn("my-6 ml-6 list-disc [&>li]:mt-2", className);
 
-    const classes = cn("my-6 ml-6 list-disc [&>li]:mt-2", className);
-
-    return "ordered" === type ? (
-      <ul className={classes}>
-        {children}
-      </ul>
-    ) :  (
-      <ol className={classes}>
-        {children}
-      </ol>
-    )
+  return "ordered" === type ? (
+    <ul className={classes}>
+      {children}
+    </ul>
+  ) :  (
+    <ol className={classes}>
+      {children}
+    </ol>
+  )
 }

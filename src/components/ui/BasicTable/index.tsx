@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import type { ReactElement } from "react";
 import { TableCell } from "~/components/ui/BasicTable/table-cell";
 import { TableHeader } from "~/components/ui/BasicTable/table-header";
 import { TableRow } from "~/components/ui/BasicTable/table-row";
@@ -11,7 +11,12 @@ interface IProps extends ChildProps, ClassNameProps {
   tableBodyContent?: ReactElement
 }
 
-export default function TypographyTable({tableHeaderContent, tableBodyContent, children, className}: IProps) {
+export default function TypographyTable({
+  tableHeaderContent, 
+  tableBodyContent, 
+  children, 
+  className
+}: IProps) {
 
   const classes = cn("my-6 w-full overflow-y-auto", className)
 

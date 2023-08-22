@@ -9,7 +9,7 @@ import { ApplyBaseLayout  }from "~/components/layout/BaseLayout";
 import type { ReactElement } from "react";
 
 export default function Home() {
-  const {data: session} = useSession();
+  const {data: session, status} = useSession();
 
   return (
     <>
@@ -20,11 +20,10 @@ export default function Home() {
       </Head>
       <main className="flex min-h-screen flex-col items-center justify-center">
         <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
-          {/* <SignIn /> */}
           <h1>Welcome to <span>Anon Vendor POS</span></h1>
-          <Link href={'/auth/signin'}>
-            Please signin to continue
-          </Link>
+          {status === "unauthenticated" && <Link href={'/auth/signin'}>Please signin to continue</Link>}
+          {status === "loading" && <p>Identifying recent login...</p>}
+          {status === "authenticated" && <Link href={'/dashboard'}>Go to dashboard</Link>}
         </div>
       </main>
     </>

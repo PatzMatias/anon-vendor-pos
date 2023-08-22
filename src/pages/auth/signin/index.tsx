@@ -1,7 +1,8 @@
-
 import type { GetServerSidePropsContext, InferGetServerSidePropsType, } from "next";
 import { getProviders, signIn } from "next-auth/react";
 import type { ClientSafeProvider } from "next-auth/react";
+import type { ReactElement } from "react";
+import { ApplyBaseLayout } from "~/components/layout/BaseLayout";
 import { getServerAuthSession } from "~/server/auth";
 
 export default function SignIn({ providers }: InferGetServerSidePropsType<typeof getServerSideProps>) {
@@ -17,6 +18,10 @@ export default function SignIn({ providers }: InferGetServerSidePropsType<typeof
       ))}
     </>
   )
+}
+
+SignIn.getLayout = function getLayout(page: ReactElement) {
+  return ApplyBaseLayout(page);
 }
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
