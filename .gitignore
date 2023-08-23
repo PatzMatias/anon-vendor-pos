@@ -43,3 +43,6 @@ firebase.config.ts
 
 # VS Code Config
 .vscode
+
+src/pages/verify-user/
+src/providers/role-access-provider.tsx
