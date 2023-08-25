@@ -1,5 +1,5 @@
 import { BaseLayout } from "~/components/layout/BaseLayout";
-import { ChildProps } from "~/definitions/react";
+import type { ChildProps } from "~/definitions/react";
 import Header from "~/components/containers/Header";
 
 

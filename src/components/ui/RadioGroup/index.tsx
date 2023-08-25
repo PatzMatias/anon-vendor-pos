@@ -1,3 +1,5 @@
+
+
 "use client"
 
 import * as React from "react"
@@ -23,7 +25,12 @@ RadioGroup.displayName = RadioGroupPrimitive.Root.displayName
 const RadioGroupItem = React.forwardRef<
   React.ElementRef<typeof RadioGroupPrimitive.Item>,
   React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item>
->(({ className, children, ...props }, ref) => {
+
+>(({ 
+  className, 
+  // children, 
+  ...props }, ref) => {
+
   return (
     <RadioGroupPrimitive.Item
       ref={ref}
@@ -40,5 +47,5 @@ const RadioGroupItem = React.forwardRef<
   )
 })
 RadioGroupItem.displayName = RadioGroupPrimitive.Item.displayName
-
+/* eslint no-unused-vars: 2 */
 export { RadioGroup, RadioGroupItem }

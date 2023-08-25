@@ -4,11 +4,13 @@ const sans = Inter({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-sans',
+  preload: true
 })
 
 const mono = Fira_Code({
   subsets: ['latin'],
-  variable: '--font-mono'
+  variable: '--font-mono',
+  preload: true
 })
 
 export default function Fonts() {

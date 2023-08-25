@@ -13,8 +13,8 @@ const firebaseAdminConfig = {
 }
 
 const app = getApps().length > 0 ? getApp() : initializeApp(firebaseAdminConfig);
-const db = getFirestore();
-const adminAuth = getAuth();
+const db = getFirestore(app);
+const adminAuth = getAuth(app);
 
 export {
   app,

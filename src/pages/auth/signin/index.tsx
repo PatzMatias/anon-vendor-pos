@@ -28,7 +28,7 @@ function GoogleSVG() {
 export default function SignIn({ providers }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   console.log(providers);
   return (
-    <section className="container-fluid h-full flex items-center justify-center px-6 mx-auto">
+    <section className="container h-full flex items-center justify-center px-6 mx-auto">
       
       {Object.values(providers).map((provider: ClientSafeProvider) => (
         <div key={provider.name}>

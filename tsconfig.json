@@ -27,7 +27,7 @@
     "./**/*.ts",
     "./**/*.tsx",
     "./**/*.cjs",
-    "./**/*.mjs",
+    "./**/*.mjs", "src/pages/dashboard/products/old.index",
   ],
   "exclude": ["node_modules"]
 }

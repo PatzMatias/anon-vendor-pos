@@ -1,5 +1,5 @@
-import React, { useState, useMemo, createContext, useContext } from 'react'
-import { ChildProps } from '~/definitions/react'
+import React, { useState, useMemo, createContext, useContext, useCallback } from 'react'
+import type { ChildProps } from '~/definitions/react'
 
 
 // create context
@@ -22,9 +22,9 @@ export const useSidebar = () => useContext(SidebarContext);
 export default function SidebarProvider({ children }: ChildProps) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
-  function toggleSidebar() {
+  const toggleSidebar= useCallback(() => {
     setIsSidebarOpen(!isSidebarOpen)
-  }
+  },[isSidebarOpen]);
 
   function closeSidebar() {
     setIsSidebarOpen(false)
@@ -36,7 +36,7 @@ export default function SidebarProvider({ children }: ChildProps) {
       toggleSidebar,
       closeSidebar,
     }),
-    [isSidebarOpen]
+    [toggleSidebar, isSidebarOpen]
   )
 
   return <SidebarContext.Provider value={value}>{children}</SidebarContext.Provider>

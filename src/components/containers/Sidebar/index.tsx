@@ -1,10 +1,10 @@
 
 import SidebarContent from "~/components/containers/Sidebar/SidebarContent";
-import { ChildProps } from "~/definitions/react";
+import type { ChildProps } from "~/definitions/react";
 
 interface IProps extends ChildProps {}
 
-export default function Sidebar({children}: IProps) {
+export default function Sidebar({}: IProps) {
 
   
   return (

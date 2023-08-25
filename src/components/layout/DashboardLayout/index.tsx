@@ -1,5 +1,5 @@
 import { BaseLayout } from "~/components/layout/BaseLayout";
-import { ChildProps } from "~/definitions/react";
+import type { ChildProps } from "~/definitions/react";
 import SidebarProvider, { useSidebar } from "~/context/sidebar-context";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
@@ -15,15 +15,13 @@ export default function DashboardLayout({children}: IProps) {
   
   useEffect(() => {
     if(isSidebarOpen) closeSidebar()
-  },[router.pathname])
+  },[isSidebarOpen, router.pathname, closeSidebar])
 
   return (
     <BaseLayout>
       <SidebarProvider>
-        <div className={`flex h-screen bg-gray-100 dark:bg-gray-900 ${isSidebarOpen && 'overflow-hidden'}`}>
-          <Sidebar>
-            sidebar
-          </Sidebar>
+        <div className={`flex h-screen bg-background dark:bg-gray-900 ${!isSidebarOpen && 'overflow-hidden'}`}>
+          <Sidebar />
           <div className="flex flex-col flex-1 w-full">
             <Header />
             <main className="h-full overflow-y-auto">

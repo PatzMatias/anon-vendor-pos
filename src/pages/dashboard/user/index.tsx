@@ -6,7 +6,7 @@ export default function UserPage() {
 
   return (
     <section className="container-fluid grid px-6 mx-auto">
-      <h1>This is a user page.</h1>
+      <h3 className="my-6">This is a user page.</h3>
       <p>Lorep ipsum dolor sit amet <Link href="#">This is a link</Link></p>
     </section>
   );

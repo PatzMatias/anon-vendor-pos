@@ -2,7 +2,7 @@ import type { ReactElement } from "react";
 import { TableCell } from "~/components/ui/BasicTable/table-cell";
 import { TableHeader } from "~/components/ui/BasicTable/table-header";
 import { TableRow } from "~/components/ui/BasicTable/table-row";
-import { ChildProps, ClassNameProps } from "~/definitions/react";
+import type { ChildProps, ClassNameProps } from "~/definitions/react";
 import { cn } from "~/lib/utils";
 
 

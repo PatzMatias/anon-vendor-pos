@@ -1,4 +1,4 @@
-const APP_STRINGS: {[key: string]: string} = {
+const APP_STRINGS: Record<string, string> = {
   site_title: `Anon Vendor POS`,
   signin: `Sign in`,
   signout: `Sign out`,

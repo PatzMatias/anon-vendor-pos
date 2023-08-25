@@ -1,4 +1,4 @@
-import { ChildProps, ClassNameProps } from "~/definitions/react";
+import type { ChildProps, ClassNameProps } from "~/definitions/react";
 import { cn } from "~/lib/utils";
 
 interface IProps extends ChildProps, ClassNameProps {

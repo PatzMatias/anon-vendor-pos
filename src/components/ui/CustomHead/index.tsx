@@ -12,7 +12,7 @@ export default function CustomHead({
 }: IProps) {
   return (
     <Head>
-      <title>{title} - {APP_STRINGS.site_title}</title>
+      <title>{`${title} - ${APP_STRINGS.site_title}`}</title>
       {description && <meta name="description" content={description} />}
       <link rel="icon" href="/favicon.ico" />
     </Head>

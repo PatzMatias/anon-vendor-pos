@@ -1,7 +1,6 @@
 
 import type { ReactElement } from "react";
-import { ChildProps } from "~/definitions/react";
-import Head from "next/head";
+import type { ChildProps } from "~/definitions/react";
 
 interface IProps extends ChildProps {}
 
