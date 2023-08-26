@@ -1,6 +1,6 @@
 import { type ReactElement } from 'react';
 import { PDFViewer } from '@react-pdf/renderer';
-import { getServerAuthSession } from "~/server/auth";
+// import { getServerAuthSession } from "~/server/auth";
 import type { GetServerSidePropsContext } from "next";
 import type { OrderInfo } from '~/pages/api/orders';
 import type { OrderData } from '~/pages/api/orders/[id]';
@@ -44,7 +44,7 @@ PrintOrder.getLayout = function getLayout(page: ReactElement) {
 }
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const session = await getServerAuthSession(context);
+  // const session = await getServerAuthSession(context);
   
   // try {
   //   if (session) {

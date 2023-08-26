@@ -1,13 +1,12 @@
-import { randomUUID } from 'crypto';
 import type { OrderInfo } from '~/pages/api/orders';
 
 export const ordersDummyData: OrderInfo[] = [
   {
-    id: randomUUID(),
+    id: 'order-1',
     created_at: new Date(),
     total_amount: 202.50,
     customer: {
-      id: randomUUID(),
+      id: `customer-1`,
       first_name: "John",
       last_name: "Dela Cruz",
       phone_number: "0999-999-9999",
@@ -15,7 +14,7 @@ export const ordersDummyData: OrderInfo[] = [
     },
     items: [
       {
-        id: randomUUID(),
+        id: `1`,
         description: `Chippy Original barbecue flavored corn chip`,
         name: 'Chippy Original Barbecue',
         price: 10.00,
@@ -25,7 +24,7 @@ export const ordersDummyData: OrderInfo[] = [
         quantity: 5,
       },
       {
-        id: randomUUID(),
+        id: `2`,
         description: `Chippy Original barbecue flavored corn chip`,
         name: 'Chippy Original Barbecue',
         price: 30.50,
@@ -37,11 +36,11 @@ export const ordersDummyData: OrderInfo[] = [
     ],
   },
   {
-    id: randomUUID(),
+    id: `order-2`,
     created_at: new Date(`2023 August 21`),
     total_amount: 405.00,
     customer: {
-      id: randomUUID(),
+      id: `customer-2`,
       first_name: "Gina",
       last_name: "Dimagiba",
       phone_number: "0999-999-9999",
@@ -49,7 +48,7 @@ export const ordersDummyData: OrderInfo[] = [
     },
     items: [
       {
-        id: randomUUID(),
+        id: `1`,
         description: `Chippy Original barbecue flavored corn chip`,
         name: 'Chippy Original Barbecue',
         price: 10.00,
@@ -59,7 +58,7 @@ export const ordersDummyData: OrderInfo[] = [
         quantity: 5,
       },
       {
-        id: randomUUID(),
+        id: `2`,
         description: `Chippy Original barbecue flavored corn chip`,
         name: 'Chippy Original Barbecue',
         price: 30.50,
@@ -69,7 +68,7 @@ export const ordersDummyData: OrderInfo[] = [
         quantity: 5,
       },
       {
-        id: randomUUID(),
+        id: `3`,
         description: `Chippy Chilly Cheese flavored corn chip`,
         name: 'Chippy Chilly Cheese',
         price: 10.00,
@@ -79,7 +78,7 @@ export const ordersDummyData: OrderInfo[] = [
         quantity: 5,
       },
       {
-        id: randomUUID(),
+        id: `4`,
         description: `Chippy Chilly Cheese flavored corn chip`,
         name: 'Chippy Chilly Cheese',
         price: 30.50,

@@ -3,7 +3,7 @@ import DashboardLayout from "~/components/layout/DashboardLayout";
 import CustomHead from "~/components/ui/CustomHead";
 import DashboardPageHeader from "~/components/ui/DashboardPageHeader";
 import type { ProductData, ProductItem } from "~/pages/api/products";
-import { getServerAuthSession } from "~/server/auth";
+// import { getServerAuthSession } from "~/server/auth";
 import type { GetServerSidePropsContext } from "next";
 import DataTable from "~/components/table-parts/products/data-table";
 import { columns } from "~/components/table-parts/products/columns";
@@ -36,11 +36,11 @@ Products.getLayout = function getLayout(page: ReactElement) {
   )
 }
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const session = await getServerAuthSession(context);
+export async function getServerSideProps(_context: GetServerSidePropsContext) {
+  // const session = await getServerAuthSession(context);
   
-  try {
-    if (session) {
+  // try {
+  //   if (session) {
       const res = await fetch('http://localhost:3000/api/products', {
         method: 'GET',
         headers: {
@@ -56,12 +56,12 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
           products: products
         }
       };
-    }
-  } catch(e) {
-    return {
-      props: {
-        products: []
-      }
-    };
-  }
+  //  }
+  // } catch(e) {
+  //   return {
+  //     props: {
+  //       products: []
+  //     }
+  //   };
+  // }
 }

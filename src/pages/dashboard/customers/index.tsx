@@ -2,7 +2,7 @@ import type { ReactElement } from "react";
 import DashboardLayout from "~/components/layout/DashboardLayout";
 import CustomHead from "~/components/ui/CustomHead";
 import DashboardPageHeader from "~/components/ui/DashboardPageHeader";
-import { getServerAuthSession } from "~/server/auth";
+// import { getServerAuthSession } from "~/server/auth";
 import type { GetServerSidePropsContext } from "next";
 import type { CustomerInfo, CustomersData } from "~/pages/api/customers";
 import DataTable from "~/components/table-parts/customers/data-table";
@@ -35,8 +35,8 @@ Customers.getLayout = function getLayout(page: ReactElement) {
   )
 }
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const session = await getServerAuthSession(context);
+export async function getServerSideProps(_context: GetServerSidePropsContext) {
+  // const session = await getServerAuthSession(context);
   
   // try {
   //   if (session) {

@@ -3,7 +3,7 @@ import DashboardLayout from "~/components/layout/DashboardLayout";
 import CustomHead from "~/components/ui/CustomHead";
 import DashboardPageHeader from "~/components/ui/DashboardPageHeader";
 import type { ProductItem } from "~/pages/api/products";
-import { getServerAuthSession } from "~/server/auth";
+// import { getServerAuthSession } from "~/server/auth";
 import type { GetServerSidePropsContext } from "next";
 import type { ProductItemData } from "~/pages/api/products/[id]";
 
@@ -34,7 +34,7 @@ EditProduct.getLayout = function getLayout(page: ReactElement) {
 }
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const session = await getServerAuthSession(context);
+  // const session = await getServerAuthSession(context);
   
   // try {
   //   if (session) {
