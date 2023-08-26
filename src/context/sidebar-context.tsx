@@ -6,6 +6,7 @@ import type { ChildProps } from '~/definitions/react'
 export const SidebarContext = createContext<{
   isSidebarOpen: boolean,
   toggleSidebar: () => void,
+  openSidebar: () => void,
   closeSidebar: () => void
 }>({
   isSidebarOpen: false,
@@ -13,6 +14,9 @@ export const SidebarContext = createContext<{
     //do nothing
   },
   closeSidebar: () => {
+    // do nothing
+  },
+  openSidebar: () => {
     // do nothing
   }
 })
@@ -29,11 +33,16 @@ export default function SidebarProvider({ children }: ChildProps) {
   function closeSidebar() {
     setIsSidebarOpen(false)
   }
+  
+  function openSidebar() {
+    setIsSidebarOpen(true)
+  }
 
   const value = useMemo(
     () => ({
       isSidebarOpen,
       toggleSidebar,
+      openSidebar,
       closeSidebar,
     }),
     [toggleSidebar, isSidebarOpen]

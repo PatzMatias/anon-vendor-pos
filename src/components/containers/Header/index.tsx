@@ -33,11 +33,20 @@ export default function Header({ children }: ChildProps) {
 
   const router = useRouter()
 
-  const {isSidebarOpen, toggleSidebar} = useSidebar();
+  const {isSidebarOpen, toggleSidebar, openSidebar} = useSidebar();
 
   useEffect(() => {
-    if(isSidebarOpen) toggleSidebar()
-  }, [router.asPath, isSidebarOpen, toggleSidebar])
+    router.events.on("routeChangeComplete" ,() => {
+      setTimeout(() => {
+        if(isSidebarOpen) toggleSidebar()
+      },500)
+  })
+  }, [router.asPath, router.events, isSidebarOpen, toggleSidebar])
+
+  const onSidebarOpen = (_open: boolean) => {
+    openSidebar();
+    toggleSidebar();
+  };
   
   // console.log("session", session);
 
@@ -52,7 +61,7 @@ export default function Header({ children }: ChildProps) {
     <header className="z-10 py-4 bg-background shadow-bottom dark:bg-gray-800 text-center">
       <div className="container-fluid flex justify-between lg:justify-end items-center px-6 h-full mx-auto">
         <div className="sidebar-trigger lg:hidden">
-          <Sheet open={isSidebarOpen} onOpenChange={toggleSidebar}>
+          <Sheet open={isSidebarOpen} onOpenChange={onSidebarOpen}>
             <SheetTrigger asChild>
               <Button size="icon" variant="ghost">
                 <Menu />
