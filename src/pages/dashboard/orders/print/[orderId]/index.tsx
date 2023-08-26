@@ -46,8 +46,8 @@ PrintOrder.getLayout = function getLayout(page: ReactElement) {
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const session = await getServerAuthSession(context);
   
-  try {
-    if (session) {
+  // try {
+  //   if (session) {
       const query = context.query;
         const res = await fetch(`http://localhost:3000/api/orders/${query.orderId as string}`, {
           method: 'GET',
@@ -65,12 +65,12 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
           order
         }
       };
-    }
-  } catch(e) {
-    return {
-      props: {
-        order: null
-      }
-    };
-  }
-}
+  //   }
+  // } catch(e) {
+  //   return {
+  //     props: {
+  //       order: null
+  //     }
+  //   };
+  // }
+}npm 

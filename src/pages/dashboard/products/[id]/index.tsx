@@ -36,32 +36,29 @@ EditProduct.getLayout = function getLayout(page: ReactElement) {
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const session = await getServerAuthSession(context);
   
-  try {
-    if (session) {
+  // try {
+  //   if (session) {
       const query = context.query;
       const res = await fetch(`http://localhost:3000/api/products/${query.id as string}`, {
         method: 'GET',
         headers: {
           'content-type': 'application/json;charset=UTF-8',
         },
-      }).then
-      (
-        async (result): Promise<ProductItemData> => 
-        await result.json() as ProductItemData
-      );
-      const product: ProductItem | null = res.results ?? null;
+      })
+      const productData = await res.json() as ProductItemData;
+      const product: ProductItem | null = productData.results ?? null;
 
       return {
         props: {
           product: product
         }
       };
-    }
-  } catch(e) {
-    return {
-      props: {
-        products: []
-      }
-    };
-  }
+  //  }
+  // } catch(e) {
+  //   return {
+  //     props: {
+  //       products: []
+  //     }
+  //   };
+  // }
 }

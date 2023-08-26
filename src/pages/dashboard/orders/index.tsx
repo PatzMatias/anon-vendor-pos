@@ -38,8 +38,8 @@ Order.getLayout = function getLayout(page: ReactElement) {
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const session = await getServerAuthSession(context);
   
-  try {
-    if (session) {
+  // try {
+  //   if (session) {
         const res = await fetch('http://localhost:3000/api/orders', {
           method: 'GET',
           headers: {
@@ -56,12 +56,12 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
           orders
         }
       };
-    }
-  } catch(e) {
-    return {
-      props: {
-        orders: []
-      }
-    };
-  }
+  //   }
+  // } catch(e) {
+  //   return {
+  //     props: {
+  //       orders: []
+  //     }
+  //   };
+  // }
 }

@@ -1,17 +1,15 @@
 import type { ReactElement } from "react";
 import DashboardLayout from "~/components/layout/DashboardLayout";
 import CustomHead from "~/components/ui/CustomHead";
+import DashboardPageHeader from "~/components/ui/DashboardPageHeader";
 
 export default function UsersPage() {
 
   return (
     <>
       <CustomHead title={`Users`} description="The system's users management page" />
-      <section className="container-fluid grid px-6 mx-auto">
-        <div className="my-6">
-          <h3>Users</h3>
-          <p className="text-muted-foreground mt-0">You can now start managing your users here.</p>
-        </div>
+      <section className="container grid px-6 mx-auto">
+        <DashboardPageHeader title={`Users`} description={`You can now start managing your users here.`} />
       </section>
     </>
   );
