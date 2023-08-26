@@ -1,6 +1,6 @@
 import { type ReactElement } from 'react';
 import { PDFViewer } from '@react-pdf/renderer';
-// import { getServerAuthSession } from "~/server/auth";
+import { getServerAuthSession } from "~/server/auth";
 import type { GetServerSidePropsContext } from "next";
 import type { OrderInfo } from '~/pages/api/orders';
 import type { OrderData } from '~/pages/api/orders/[id]';
@@ -8,6 +8,8 @@ import DashboardLayout from "~/components/layout/DashboardLayout";
 import CustomHead from '~/components/ui/CustomHead';
 import DashboardPageHeader from '~/components/ui/DashboardPageHeader';
 import Invoice from '~/components/ui/PDFParts/Invoice';
+import { env } from '~/env.mjs';
+env
 
 interface IProps {
   order: OrderInfo
@@ -44,12 +46,12 @@ PrintOrder.getLayout = function getLayout(page: ReactElement) {
 }
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  // const session = await getServerAuthSession(context);
+  const session = await getServerAuthSession(context);
   
-  // try {
-  //   if (session) {
+  try {
+    if (session) {
       const query = context.query;
-        const res = await fetch(`http://localhost:3000/api/orders/${query.orderId as string}`, {
+        const res = await fetch(`${env.NEXT_PUBLIC_ROOT_URL}/api/orders/${query.orderId as string}`, {
           method: 'GET',
           headers: {
             'content-type': 'application/json;charset=UTF-8',
@@ -65,12 +67,12 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
           order
         }
       };
-  //   }
-  // } catch(e) {
-  //   return {
-  //     props: {
-  //       order: null
-  //     }
-  //   };
-  // }
+    }
+  } catch(e) {
+    return {
+      props: {
+        order: null
+      }
+    };
+  }
 }

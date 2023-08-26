@@ -3,9 +3,10 @@ import DashboardLayout from "~/components/layout/DashboardLayout";
 import CustomHead from "~/components/ui/CustomHead";
 import DashboardPageHeader from "~/components/ui/DashboardPageHeader";
 import type { ProductItem } from "~/pages/api/products";
-// import { getServerAuthSession } from "~/server/auth";
+import { getServerAuthSession } from "~/server/auth";
 import type { GetServerSidePropsContext } from "next";
 import type { ProductItemData } from "~/pages/api/products/[id]";
+import { env } from "~/env.mjs";
 
 interface IProps {
   product: ProductItem;
@@ -34,12 +35,12 @@ EditProduct.getLayout = function getLayout(page: ReactElement) {
 }
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  // const session = await getServerAuthSession(context);
+  const session = await getServerAuthSession(context);
   
-  // try {
-  //   if (session) {
+  try {
+    if (session) {
       const query = context.query;
-      const res = await fetch(`http://localhost:3000/api/products/${query.id as string}`, {
+      const res = await fetch(`${env.NEXT_PUBLIC_ROOT_URL}/api/products/${query.id as string}`, {
         method: 'GET',
         headers: {
           'content-type': 'application/json;charset=UTF-8',
@@ -53,12 +54,12 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
           product: product
         }
       };
-  //  }
-  // } catch(e) {
-  //   return {
-  //     props: {
-  //       products: []
-  //     }
-  //   };
-  // }
+   }
+  } catch(e) {
+    return {
+      props: {
+        products: []
+      }
+    };
+  }
 }

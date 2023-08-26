@@ -2,11 +2,12 @@ import type { ReactElement } from "react";
 import DashboardLayout from "~/components/layout/DashboardLayout";
 import CustomHead from "~/components/ui/CustomHead";
 import DashboardPageHeader from "~/components/ui/DashboardPageHeader";
-// import { getServerAuthSession } from "~/server/auth";
+import { getServerAuthSession } from "~/server/auth";
 import type { GetServerSidePropsContext } from "next";
 import type { CustomerInfo, CustomersData } from "~/pages/api/customers";
 import DataTable from "~/components/table-parts/customers/data-table";
 import { columns } from "~/components/table-parts/customers/columns";
+import { env } from "~/env.mjs";
 
 interface IProps {
   customers: CustomerInfo[];
@@ -35,12 +36,12 @@ Customers.getLayout = function getLayout(page: ReactElement) {
   )
 }
 
-export async function getServerSideProps(_context: GetServerSidePropsContext) {
-  // const session = await getServerAuthSession(context);
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const session = await getServerAuthSession(context);
   
-  // try {
-  //   if (session) {
-      const res = await fetch('http://localhost:3000/api/customers', {
+  try {
+    if (session) {
+      const res = await fetch(`${env.NEXT_PUBLIC_ROOT_URL}/api/customers`, {
         method: 'GET',
         headers: {
           'content-type': 'application/json;charset=UTF-8',
@@ -56,12 +57,12 @@ export async function getServerSideProps(_context: GetServerSidePropsContext) {
           customers
         }
       };
-  //   }
-  // } catch(e) {
-  //   return {
-  //     props: {
-  //       customers: []
-  //     }
-  //   };
-  // }
+    }
+  } catch(e) {
+    return {
+      props: {
+        customers: []
+      }
+    };
+  }
 }
