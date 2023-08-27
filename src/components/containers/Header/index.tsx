@@ -60,6 +60,14 @@ export default function Header({ children, noMenu = false }: IProps) {
   //   if(status === "unauthenticated") router.push("/")
   // }, [status]);
 
+  const callSignOut = () => {
+    const callingOut = async () => {
+      await signOut({callbackUrl: env.NEXT_PUBLIC_ROOT_URL});
+    }
+
+    void callingOut();
+  }
+
   return children ? (
   <header className="z-10 py-4 bg-background shadow-bottom dark:bg-gray-800 text-center">
     {children}
@@ -92,7 +100,7 @@ export default function Header({ children, noMenu = false }: IProps) {
               <DropdownMenuLabel>{`Hello, ${session?.user.name?.split(" ")[0] ?? "User"}!`}</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuGroup>
-                <DropdownMenuItem onClick={() => signOut({callbackUrl: env.NEXT_PUBLIC_ROOT_URL})}>
+                <DropdownMenuItem onClick={() => callSignOut()}>
                   <LogOut className="mr-2 h-4 w-4" />
                   <span>Sign out</span>
                 </DropdownMenuItem>

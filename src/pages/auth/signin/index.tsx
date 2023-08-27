@@ -32,7 +32,9 @@ export default function SignIn({ providers }: InferGetServerSidePropsType<typeof
       
       {Object.values(providers).map((provider: ClientSafeProvider) => (
         <div key={provider.name}>
-          <Button variant="outline" size="lg" onClick={() => signIn(provider.id)}>
+          <Button variant="outline" size="lg" onClick={() => {
+            void signIn(provider.id)
+          }}>
             { provider.name === "Google" && (<GoogleSVG />) }
             <span className="ml-2 text-lg">Sign in with <b>{provider.name}</b></span>
           </Button>

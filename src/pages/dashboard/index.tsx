@@ -15,7 +15,9 @@ export default function Home() {
   const router = useRouter();
   
 
-  const goToRoute = (href: string) => router.push(href);
+  const goToRoute = (href: string) => {
+    void router.push(href)
+  };
 
   return (
     <>
@@ -45,7 +47,9 @@ export default function Home() {
                       </CardDescription>
                     </CardContent>
                     <CardFooter className="justify-end">
-                      <Button className="flex items-center" variant={buttonVariant} onClick={() => goToRoute(route.path)}><span className="mr-1">Go</span><ArrowRight size={16} /></Button>
+                      <Button className="flex items-center" variant={buttonVariant} onClick={() => goToRoute(route.path)}>
+                        <span className="mr-1">Go</span><ArrowRight size={16} />
+                      </Button>
                     </CardFooter>
                   </Card>
                 )

@@ -42,27 +42,33 @@ const ClientAuthProvider = ({ children }: PropsWithChildren<Record<string, never
 
   const { data: session } = useSession();
 
-  const signIn = useCallback( async (customToken: string) => {
+  const callSignIn = async (token: string) => {
     try {
       setStatus('loading');
-      await signInWithCustomToken(auth, customToken);
+      await signInWithCustomToken(auth, token);
       setStatus('authenticated');
     } catch (error) {
       setStatus('unauthenticated');
       console.error(error);
     }
+    return;
+  }
+  
+
+  const signIn = useCallback((customToken: string) => {
+    void callSignIn(customToken);
   },[]);
 
-  const signOut = async () => {
+  const signOut = () => {
     setStatus('authenticated');
-    await auth.signOut();
-    await sessionSignOut();
+    void auth.signOut();
+    void sessionSignOut();
   };
 
   // sign in with session customtoken becomes available
   useEffect(() => {
     if('unauthenticated' === status && session?.customToken) {
-      signIn(session.customToken)
+      void signIn(session.customToken)
     }
   },[status, session, signIn]);
 
@@ -71,7 +77,7 @@ const ClientAuthProvider = ({ children }: PropsWithChildren<Record<string, never
       if (user) 
         setStatus('authenticated');
       else 
-        signOut()
+        void signOut()
     });
   }, [status]);
 

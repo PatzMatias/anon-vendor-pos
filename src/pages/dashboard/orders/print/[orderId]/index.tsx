@@ -1,7 +1,5 @@
 import { useEffect, type ReactElement, useState, useCallback } from 'react';
 import { PDFViewer } from '@react-pdf/renderer';
-import { getServerAuthSession } from "~/server/auth";
-import type { GetServerSidePropsContext } from "next";
 import type { OrderInfo } from '~/pages/api/orders';
 import type { OrderData } from '~/pages/api/orders/[id]';
 import DashboardLayout from "~/components/layout/DashboardLayout";
@@ -10,18 +8,17 @@ import DashboardPageHeader from '~/components/ui/DashboardPageHeader';
 import Invoice from '~/components/ui/PDFParts/Invoice';
 import { env } from '~/env.mjs';
 import { useRouter } from 'next/router';
-import { error } from 'console';
 import { Skeleton } from '~/components/ui/Skeleton';
 env
 
-interface IProps {
-  order: OrderInfo
-}
+// interface IProps {
+//   order: OrderInfo
+// }
 
-type orderState = {
-  data: OrderInfo  | null,
-  loading: boolean,
-  error: boolean
+type OrderState = {
+  data?: OrderInfo  | null,
+  loading?: boolean,
+  error?: boolean
 }
 
 // Create Document Component
@@ -30,44 +27,46 @@ export default function PrintOrder() {
   const router = useRouter();
   const params = router.query;
   const { orderId } = params;
-  const [order, setOrder] = useState<orderState>({
+  const [order, setOrder] = useState<OrderState>({
     data: null,
     loading: false,
     error: false,
   });
 
-  const handleSetOrder = (newState: {}) => {
-    setOrder((prevState: any) => ({...prevState, ...newState}))
+  const handleSetOrder = (newState: OrderState) => {
+    setOrder((prevState: OrderState) => ({...prevState, ...newState}))
   }
 
-  const getOrder = useCallback(async() => {
-    handleSetOrder({loading: true})
-    try {
-        console.log("trying order data", orderId);
-        const res = await fetch(`${env.NEXT_PUBLIC_ROOT_URL}/api/orders/${orderId}`, {
-          method: 'GET',
-          headers: {
-            'content-type': 'application/json;charset=UTF-8',
-          },
-        })
-  
-        const orderData = await res.json() as OrderData;
+  const getOrder = useCallback(() => {
+    const fetchOrder = async () => {
+      handleSetOrder({loading: true})
+      const res = await fetch(`${env.NEXT_PUBLIC_ROOT_URL}/api/orders/${orderId as string}`, {
+        method: 'GET',
+        headers: {
+          'content-type': 'application/json;charset=UTF-8',
+        },
+      })
 
-        const order: OrderInfo | null = orderData.results ?? null;
-        setTimeout(() => {handleSetOrder({data: order, loading: false});}, 1500);
-        
-        return order;
-    } catch(e) {
-      handleSetOrder({data: null, loading: false, error: true});
-      return null;
+      if(!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`)
+      }
+
+      const orderData = await res.json() as OrderData;
+
+      const order: OrderInfo | null = orderData.results ?? null;
+      handleSetOrder({data: order, loading: false});
     }
-  }, [order.data, order.loading, order.error])
+
+    fetchOrder().catch((e) => {
+      console.error(e)
+    })
+  }, [orderId])
 
   useEffect(() => {
-    if(order.data === null && order.data !== true && order.loading === false ) {
+    if(order.data === null && order.error !== true && order.loading === false ) {
       getOrder();
     }
-  }, [getOrder])
+  }, [getOrder, order.data, order.loading, order.error])
   
   return (
     <>
