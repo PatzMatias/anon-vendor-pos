@@ -101,10 +101,10 @@ export const columns: ColumnDef<OrderInfo>[] = [
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
               <DropdownMenuItem asChild>
-                <Link className="actions-menu-link" href={`/dashboard/orders/print/${row.id}`}>Print Receipt</Link>
+                <Link className="actions-menu-link" href={`/dashboard/orders/print/${encodeURIComponent(row.id)}`}>Print Receipt</Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link className="actions-menu-link" href={`/dashboard/orders/${row.id}`}>Edit Order</Link>
+                <Link className="actions-menu-link" href={`/dashboard/orders/${encodeURIComponent(row.id)}`}>Edit Order</Link>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
             </DropdownMenuContent>

@@ -29,19 +29,19 @@ export default function SidebarContent({}: IProps) {
 
               return (
                 <li className="relative px-6 py-3" key={`${key}_${index}`}>
-                    <Link className={linkClass} href={path}>
-                      {
-                        router.pathname === path && (
-                          <span
-                          className="absolute inset-y-0 left-0 w-1 bg-primary rounded-tr-lg rounded-br-lg"
-                          aria-hidden="true" />
-                        )
-                      }
-                      <span>
-                        {route.icon()}
-                      </span>
-                      <span>{route.label}</span>
-                    </Link>
+                  <Link className={linkClass} href={path}>
+                    {
+                      router.pathname === path && (
+                        <span
+                        className="absolute inset-y-0 left-0 w-1 bg-primary rounded-tr-lg rounded-br-lg"
+                        aria-hidden="true" />
+                      )
+                    }
+                    <span>
+                      {route.icon()}
+                    </span>
+                    <span>{route.label}</span>
+                  </Link>
                 </li>
               )
             })

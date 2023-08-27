@@ -104,7 +104,7 @@ export interface IInvoiceProps {
 }
 
 const Invoice = ({order}: IInvoiceProps) => (
-    <Document>
+    <Document title={`Invoice ${order.id}`} creator={`created by the Anon Vendor POS app`}>
       <Page size="A4" style={styles.page}>
         {/* <Image style={styles.logo} src={logo} /> */}
         <InvoiceTitle title='Invoice'/>

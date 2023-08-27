@@ -12,7 +12,7 @@ export default function FullPageLayout({children, header}: IProps) {
     <BaseLayout>
       <div className={`flex h-screen bg-background dark:bg-gray-900`}>
         <div className="flex flex-col flex-1 w-full">
-          {header && <Header />}
+          {header && <Header noMenu={true} />}
           <main className="h-full overflow-y-auto">
               {children}
           </main>

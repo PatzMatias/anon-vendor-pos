@@ -13,6 +13,7 @@ import CustomHead from "~/components/ui/CustomHead";
 export default function Home() {
 
   const router = useRouter();
+  
 
   const goToRoute = (href: string) => router.push(href);
 

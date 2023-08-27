@@ -1,6 +1,7 @@
 import { useSession } from "next-auth/react";
-import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/Avatar";
 import { User, LogOut, Menu } from "lucide-react";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 import { Button } from "~/components/ui/Button";
 import type { ChildProps } from "~/definitions/react";
 import { 
@@ -18,16 +19,17 @@ import {
   SheetContent,
   SheetTrigger,
 } from "~/components/ui/Sheet"
-import { useEffect } from "react";
-import { useRouter } from "next/router";
-
-import { env } from "~/env.mjs";
+import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/Avatar";;
 import SidebarContent from "~/components/containers/Sidebar/SidebarContent";
 import { useSidebar } from "~/context/sidebar-context";
+import { env } from "~/env.mjs";
+import { cn } from "~/lib/utils";
 
-// interface IProps extends ChildProps {}
+interface IProps extends ChildProps {
+  noMenu?: boolean
+}
 
-export default function Header({ children }: ChildProps) {
+export default function Header({ children, noMenu = false }: IProps) {
 
   const {data: session } = useSession();
 
@@ -47,6 +49,10 @@ export default function Header({ children }: ChildProps) {
     openSidebar();
     toggleSidebar();
   };
+
+  const menuTriggerClass = cn({
+    [`hidden`]: noMenu
+  })
   
   // console.log("session", session);
 
@@ -63,7 +69,7 @@ export default function Header({ children }: ChildProps) {
         <div className="sidebar-trigger lg:hidden">
           <Sheet open={isSidebarOpen} onOpenChange={onSidebarOpen}>
             <SheetTrigger asChild>
-              <Button size="icon" variant="ghost">
+              <Button className={menuTriggerClass} size="icon" variant="ghost">
                 <Menu />
               </Button>
             </SheetTrigger>

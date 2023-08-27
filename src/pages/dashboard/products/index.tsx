@@ -24,7 +24,6 @@ export default function Products({products}: IProps) {
         <div className="grid grid-cols-1">
           <DataTable columns={columns} data={products} />
         </div>
-        
       </section>
     </>
   );
