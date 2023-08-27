@@ -4,7 +4,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import type { OrderInfo } from '~/pages/api/orders';
 
 export type OrderData = {
-  results?: OrderInfo,
+  results: OrderInfo | null,
   message?: string;
 }
 
@@ -106,14 +106,15 @@ export default function handler(
   switch(req.method) {
     case 'GET': 
       const findData = ordersDummyData.filter((order) => (order.id === id));
-      const order = findData[0]
+      const order = findData[0] ?? null;
       res.status(200).json({
         results: order
       })
       break;
     default:
       res.status(405).json({
-        message: `${req.method} Not Allowed`
+        message: `${req.method} Not Allowed`,
+        results: null
       })
       break;
       

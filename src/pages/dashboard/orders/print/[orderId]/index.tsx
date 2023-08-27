@@ -80,7 +80,7 @@ export default function PrintOrder() {
           order.data === null && order.error && (<div>There was a problem loading the file...</div>)
         }
         {
-          order.data !== null && (
+          order.data && order.data !== null && (
             <PDFViewer className={`w-full h-screen`}>
               <Invoice order={order.data} />
             </PDFViewer>
