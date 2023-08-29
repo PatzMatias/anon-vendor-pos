@@ -41,7 +41,7 @@ export default function Header({ children, noMenu = false }: IProps) {
     router.events.on("routeChangeComplete" ,() => {
       setTimeout(() => {
         if(isSidebarOpen) toggleSidebar()
-      },500)
+      }, 350)
   })
   }, [router.asPath, router.events, isSidebarOpen, toggleSidebar])
 

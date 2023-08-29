@@ -2,18 +2,32 @@ import type { ReactElement } from "react";
 import DashboardLayout from "~/components/layout/DashboardLayout";
 import CustomHead from "~/components/ui/CustomHead";
 import DashboardPageHeader from "~/components/ui/DashboardPageHeader";
-import { getServerAuthSession } from "~/server/auth";
-import type { GetServerSidePropsContext } from "next";
-import type { CustomerInfo, CustomersData } from "~/pages/api/customers";
+import TableSkeleton from "~/components/containers/TableSkeleton";
 import DataTable from "~/components/table-parts/customers/data-table";
 import { columns } from "~/components/table-parts/customers/columns";
-import { env } from "~/env.mjs";
+import { useSession } from "next-auth/react";
+import { api } from "~/lib/utils/api";
 
-interface IProps {
-  customers: CustomerInfo[];
-}
+// import { getServerAuthSession } from "~/server/auth";
+// import type { GetServerSidePropsContext } from "next";
+// import type { CustomerInfo, CustomersData } from "~/pages/api/customers";
+// import { env } from "~/env.mjs";
 
-export default function Customers({customers}: IProps) {
+// interface IProps {
+//   customers: CustomerInfo[];
+// }
+
+export default function Customers() {  
+  const { data: session } = useSession();
+
+  const {
+    data: customers, 
+    isLoading, 
+    isSuccess
+  } = api.customers.list.useQuery(
+      undefined, 
+      { enabled: session?.user !== undefined }
+    );
 
   return (
     <>
@@ -21,7 +35,8 @@ export default function Customers({customers}: IProps) {
       <section className="container grid px-6 mx-auto">
         <DashboardPageHeader title="Customers" description="Manage your customers' information here."/>
         <div className="grid grid-cols-1">
-          <DataTable columns={columns} data={customers} />
+          {isLoading && <TableSkeleton columnCount={2}/>}
+          {isSuccess && <DataTable columns={columns} data={customers} />}
         </div>
       </section>
     </>
@@ -36,33 +51,34 @@ Customers.getLayout = function getLayout(page: ReactElement) {
   )
 }
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const session = await getServerAuthSession(context);
+// export async function getServerSideProps(context: GetServerSidePropsContext) {
+//   const session = await getServerAuthSession(context);
   
-  try {
-    if (session) {
-      const res = await fetch(`${env.NEXT_PUBLIC_ROOT_URL}/api/customers`, {
-        method: 'GET',
-        headers: {
-          'content-type': 'application/json;charset=UTF-8',
-        },
-      })
-      
-      const customersData = await res.json() as CustomersData;
-  
-      const customers: CustomerInfo[] = customersData.results ?? [];
+//   try {
+//     if (session) {
+//       const res = await fetch(`${env.NEXT_PUBLIC_ROOT_URL}/api/customers`, {
+//         method: 'GET',
 
-      return {
-        props: {
-          customers
-        }
-      };
-    }
-  } catch(e) {
-    return {
-      props: {
-        customers: []
-      }
-    };
-  }
-}
+//         headers: {
+//           'content-type': 'application/json;charset=UTF-8',
+//         },
+//       })
+      
+//       const customersData = await res.json() as CustomersData;
+  
+//       const customers: CustomerInfo[] = customersData.results ?? [];
+
+//       return {
+//         props: {
+//           customers
+//         }
+//       };
+//     }
+//   } catch(e) {
+//     return {
+//       props: {
+//         customers: []
+//       }
+//     };
+//   }
+// }

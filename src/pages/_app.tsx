@@ -4,6 +4,7 @@ import type { Session } from "next-auth";
 import type { NextPage } from "next";
 import type { AppProps } from "next/app";
 import type { ReactElement, ReactNode } from "react";
+import { api } from "~/lib/utils/api";
 import "~/styles/globals.css";
 
 // import ClientAuthProvider from "~/providers/client-auth-provider";
@@ -35,4 +36,4 @@ function App ({
   );
 };
 
-export default App;
+export default api.withTRPC(App);

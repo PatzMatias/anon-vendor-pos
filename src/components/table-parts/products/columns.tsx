@@ -99,7 +99,13 @@ export const columns: ColumnDef<ProductItem>[] = [
       const imgUrl = row.getValue("image")
 
       if(imgUrl && typeof imgUrl === "string") {
-        return <Image unoptimized width={82} height={82} className="w-[82px]" src={imgUrl} alt={`product img`}/>
+        return <Image 
+          src={imgUrl} 
+          width="260"
+          height="230"
+          className="max-w-[82px] w-full h-auto"  
+          loading="lazy"
+          alt={`product img`}/>
       }
 
       return imgUrl;

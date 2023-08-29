@@ -1,8 +1,6 @@
-import { randomUUID } from 'crypto';
-
 export const dummyData = [
   {
-    id: randomUUID(),
+    id: `1`,
     available: true,
     categories: ['salty-snack'],
     description: `Chippy Original barbecue flavored corn chip`,
@@ -13,7 +11,7 @@ export const dummyData = [
     size: '27g'
   },
   {
-    id: randomUUID(),
+    id: `2`,
     available: true,
     categories: ['salty-snack'],
     description: `Chippy Original barbecue flavored corn chip`,
@@ -24,7 +22,7 @@ export const dummyData = [
     size: '110g'
   },
   {
-    id: randomUUID(),
+    id: `3`,
     available: true,
     categories: ['salty-snack'],
     description: `Chippy Original barbecue flavored corn chip`,
@@ -35,7 +33,7 @@ export const dummyData = [
     size: '200g'
   },
   {
-    id: randomUUID(),
+    id: `4`,
     available: true,
     categories: ['salty-snack'],
     description: `Chippy Mild & Tasty OG Barbecue with Less Salt`,
@@ -46,7 +44,7 @@ export const dummyData = [
     size: '27g'
   },
   {
-    id: randomUUID(),
+    id: `5`,
     available: true,
     categories: ['salty-snack'],
     description: `Chippy Mild & Tasty OG Barbecue with Less Salt`,
@@ -57,7 +55,7 @@ export const dummyData = [
     size: '110g'
   },
   {
-    id: randomUUID(),
+    id: `6`,
     available: true,
     categories: ['salty-snack'],
     description: `Chippy Mild & Tasty OG Barbecue with Less Salt`,
@@ -68,7 +66,7 @@ export const dummyData = [
     size: '200g'
   },
   {
-    id: randomUUID(),
+    id: `7`,
     available: true,
     categories: ['salty-snack'],
     description: `Chippy Chilly Cheese flavored corn chip`,
@@ -79,7 +77,7 @@ export const dummyData = [
     size: '27g'
   },
   {
-    id: randomUUID(),
+    id: `8`,
     available: true,
     categories: ['salty-snack'],
     description: `Chippy Chilly Cheese flavored corn chip`,
@@ -90,7 +88,7 @@ export const dummyData = [
     size: '110g'
   },
   {
-    id: randomUUID(),
+    id: `9`,
     available: true,
     categories: ['salty-snack'],
     description: `Chippy Chilly Cheese flavored corn chip`,
@@ -100,4 +98,4 @@ export const dummyData = [
     short_name: 'CHIPPY CHILLY CHIZ PRTY PCK 200g',
     size: '200g'
   },
-]
+];
