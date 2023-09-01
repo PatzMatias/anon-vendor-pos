@@ -24,14 +24,14 @@ export default function SidebarContent({}: IProps) {
 
               const path = route.path;
               const defaultLinkClass = styles.nav_menu_item
-
+              const isActive = router.pathname === path || (path.length > 1 && router.pathname.startsWith(path))
               const linkClass = cn(defaultLinkClass, "flex gap-4 items-center")
 
               return (
                 <li className="relative px-6 py-3" key={`${key}_${index}`}>
                   <Link className={linkClass} href={path}>
                     {
-                      router.pathname === path && (
+                      isActive && (
                         <span
                         className="absolute inset-y-0 left-0 w-1 bg-primary rounded-tr-lg rounded-br-lg"
                         aria-hidden="true" />
